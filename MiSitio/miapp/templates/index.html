@@ -1,12 +1,11 @@
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/base.html' %} 
 
 {% block content %}
-    <h1>Hola desde el Index</h1>
-    <h1>{{title}}</h1>
-    <ul>
-
-        {%for username in SuperUsusarios %}
-        <li>{{username}}</li>
-        {% endfor%}
-    </ul>
+<h1 style="text-align: center">Hola Esta es la ruta Home🏡🏠</h1>
+<h1>{{title}}</h1>
+<ul>
+  {%for username in SuperUsusarios %}
+  <li>{{username}}</li>
+  {% endfor%}
+</ul>
 {% endblock %}

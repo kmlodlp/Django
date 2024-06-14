@@ -1,8 +1,8 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-    <h1>Proyectos de MiApp</h1>
-    {% task in tasks %}
+    <h1>Tareas Disponibles📔✍️</h1>
+    {% for task in tasks %}
         <h2>{{task.title}}</h2>
         <h2>{{task.description}}</h2>
         <button>Delete</button>

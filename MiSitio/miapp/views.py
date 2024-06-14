@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
+from .forms import CreateNewTask
 
 from . import models
 
@@ -11,7 +12,7 @@ def saludo (request):
     return HttpResponse("Hola Mundo")
 
 def saludo2 (request):
-    return HttpResponse("Hola Mundo 2")
+    return HttpResponse("<h1 style='text-align:center'>Hola Esta es la ruta Home🏡🏠</h1>")
 
 # def consulta
 def Consulta(request):
@@ -54,3 +55,21 @@ def Proyectos(request):
     projects = models.project.objects.all()
     return render(request,'projects/projects.html', {'Proyectos':projects})
 
+def Task(request):
+    tasks = models.Task.objects.all()                                                      
+    return render(request,'tasks/tasks.html', {'tasks':tasks})
+
+def Create_Task (request): 
+    title = request.GET.get('title') 
+    description = request.GET.get('description')      
+    project = models.project.objects.get(id=1)      
+
+    print(title)                                 
+    print(description)                                 
+    print(project)   
+
+    if not(title is None or description is None):
+        models.Task.objects.create(title=title,description=description, project=project)
+        print('Entre')
+
+    return render(request,'tasks/Create_Task.html', {'form': CreateNewTask()})
