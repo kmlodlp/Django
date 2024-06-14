@@ -4,7 +4,7 @@
     <h1>Tareas Disponibles📔✍️</h1>
     {% for task in tasks %}
         <h2>{{task.title}}</h2>
-        <h2>{{task.description}}</h2>
-        <button>Delete</button>
+        <h4>{{task.description}}</h4>
+        <button type="button" class="btn btn-danger">Delete</button>
     {%endfor%}
 {% endblock %}

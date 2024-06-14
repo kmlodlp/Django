@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from .forms import CreateNewTask
@@ -59,17 +59,11 @@ def Task(request):
     tasks = models.Task.objects.all()                                                      
     return render(request,'tasks/tasks.html', {'tasks':tasks})
 
-def Create_Task (request): 
-    title = request.GET.get('title') 
-    description = request.GET.get('description')      
-    project = models.project.objects.get(id=1)      
-
-    print(title)                                 
-    print(description)                                 
-    print(project)   
-
-    if not(title is None or description is None):
-        models.Task.objects.create(title=title,description=description, project=project)
-        print('Entre')
-
-    return render(request,'tasks/Create_Task.html', {'form': CreateNewTask()})
+def Create_Task (request):  
+    if request.method == 'GET':
+        return render(request,'tasks/Create_Task.html', {'form': CreateNewTask()})
+    
+    else:
+        print(request.POST)
+        models.Task.objects.create(title=request.POST['title'],description=request.POST['description'], project_id=1)
+        return redirect('/home/Tareas/')
